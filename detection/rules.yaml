@@ -1,0 +1,145 @@
+
+rules:
+
+
+  - id: SSH-001
+    name: SSH Brute Force Attack
+    description: More than 5 failed SSH login attempts from the same IP within 60 seconds
+    enabled: true
+    severity: high
+    category: authentication
+    mitre_tactic: "TA0006 - Credential Access"
+    mitre_technique: "T1110 - Brute Force"
+    condition_type: threshold
+    condition:
+      event_type: ssh_failed_login
+      count: 5
+      window_seconds: 60
+      group_by: source_ip
+    playbook: block_ip_and_notify
+    tags: [brute-force, ssh, authentication]
+
+  - id: SSH-002
+    name: SSH Login for Root Account
+    description: Direct root login via SSH — should never happen on hardened systems
+    enabled: true
+    severity: critical
+    category: authentication
+    mitre_tactic: "TA0001 - Initial Access"
+    mitre_technique: "T1078 - Valid Accounts"
+    condition_type: pattern
+    condition:
+      event_type: ssh_accepted_login
+      field: username
+      value: root
+    playbook: notify_only
+    tags: [ssh, root, authentication]
+
+  - id: SSH-003
+    name: Multiple Invalid SSH Users
+    description: 3+ attempts for non-existent users — possible username enumeration
+    enabled: true
+    severity: medium
+    category: authentication
+    mitre_tactic: "TA0006 - Credential Access"
+    mitre_technique: "T1110.003 - Password Spraying"
+    condition_type: threshold
+    condition:
+      event_type: ssh_invalid_user
+      count: 3
+      window_seconds: 120
+      group_by: source_ip
+    playbook: notify_only
+    tags: [ssh, enumeration]
+
+
+  - id: PRIV-001
+    name: Sudo Authentication Failure
+    description: A user failed to authenticate with sudo — possible insider threat
+    enabled: true
+    severity: high
+    category: privilege_escalation
+    mitre_tactic: "TA0004 - Privilege Escalation"
+    mitre_technique: "T1548 - Abuse Elevation Control Mechanism"
+    condition_type: pattern
+    condition:
+      event_type: sudo_failed
+    playbook: notify_only
+    tags: [sudo, privilege-escalation]
+
+  - id: PRIV-002
+    name: Sensitive Sudo Command
+    description: Sudo used to run potentially dangerous commands (bash, sh, python, etc)
+    enabled: true
+    severity: high
+    category: privilege_escalation
+    mitre_tactic: "TA0004 - Privilege Escalation"
+    mitre_technique: "T1548.003 - Sudo and Sudo Caching"
+    condition_type: pattern
+    condition:
+      event_type: sudo_usage
+      field: command
+      contains_any: ["/bin/bash", "/bin/sh", "python", "perl", "ruby", "nc ", "ncat", "wget", "curl"]
+    playbook: notify_only
+    tags: [sudo, privilege-escalation]
+
+
+  - id: ACCT-001
+    name: New User Account Created
+    description: A new system user was created — verify if expected
+    enabled: true
+    severity: medium
+    category: account_management
+    mitre_tactic: "TA0003 - Persistence"
+    mitre_technique: "T1136 - Create Account"
+    condition_type: pattern
+    condition:
+      event_type: user_created
+    playbook: notify_only
+    tags: [account, persistence]
+
+  - id: ACCT-002
+    name: User Account Deleted
+    description: A user account was deleted — may indicate cleanup after compromise
+    enabled: true
+    severity: high
+    category: account_management
+    mitre_tactic: "TA0003 - Persistence"
+    mitre_technique: "T1136 - Create Account"
+    condition_type: pattern
+    condition:
+      event_type: user_deleted
+    playbook: notify_only
+    tags: [account, persistence]
+
+
+  - id: NET-001
+    name: Possible Port Scan
+    description: Single IP hitting many different ports — classic port scan behavior
+    enabled: true
+    severity: medium
+    category: network
+    mitre_tactic: "TA0007 - Discovery"
+    mitre_technique: "T1046 - Network Service Discovery"
+    condition_type: threshold
+    condition:
+      event_type: port_scan
+      count: 10
+      window_seconds: 30
+      group_by: source_ip
+    playbook: block_ip_and_notify
+    tags: [network, scanning]
+
+  - id: NET-002
+    name: IP Auto-Banned by Fail2ban
+    description: Fail2ban blocked an IP — escalate if same IP banned multiple times
+    enabled: true
+    severity: medium
+    category: network
+    mitre_tactic: "TA0001 - Initial Access"
+    mitre_technique: "T1110 - Brute Force"
+    condition_type: pattern
+    condition:
+      event_type: ip_banned
+    playbook: notify_only
+    tags: [fail2ban, network]
