@@ -1,4 +1,4 @@
-#SIEM Lite
+# SIEM Lite
 
 A lightweight Security Information and Event Management system built with Python, FastAPI, React, and Redis. Designed as a portfolio-quality project demonstrating full-stack cybersecurity automation.
 
@@ -12,7 +12,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-##Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [Architecture](#-architecture)
@@ -32,7 +32,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-##Features
+## Features
 
 | Feature | Details |
 |---|---|
@@ -46,7 +46,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-##Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -95,7 +95,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-##Installation — Linux
+## Installation — Linux
 
 > Tested on **Arch Linux** and **Ubuntu 22.04+**. Steps shown for both.
 
@@ -208,7 +208,7 @@ Open **http://localhost:3000** and refresh — events and alerts will appear.
 
 ---
 
-##Installation — Windows
+## Installation — Windows
 
 > **Tested on:** Windows 10 (21H2+) and Windows 11
 > **Time:** ~20–30 minutes
