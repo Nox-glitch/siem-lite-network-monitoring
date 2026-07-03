@@ -1,4 +1,4 @@
-# 🛡️ SIEM Lite
+#SIEM Lite
 
 A lightweight Security Information and Event Management system built with Python, FastAPI, React, and Redis. Designed as a portfolio-quality project demonstrating full-stack cybersecurity automation.
 
@@ -12,7 +12,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-## 📑 Table of Contents
+##Table of Contents
 
 - [Features](#-features)
 - [Architecture](#-architecture)
@@ -32,7 +32,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-## ✨ Features
+##Features
 
 | Feature | Details |
 |---|---|
@@ -46,7 +46,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-## 🏗️ Architecture
+##Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -95,7 +95,7 @@ A lightweight Security Information and Event Management system built with Python
 
 ---
 
-## 🐧 Installation — Linux
+##Installation — Linux
 
 > Tested on **Arch Linux** and **Ubuntu 22.04+**. Steps shown for both.
 
@@ -208,7 +208,7 @@ Open **http://localhost:3000** and refresh — events and alerts will appear.
 
 ---
 
-## 🪟 Installation — Windows
+##Installation — Windows
 
 > **Tested on:** Windows 10 (21H2+) and Windows 11
 > **Time:** ~20–30 minutes
@@ -217,11 +217,11 @@ Open **http://localhost:3000** and refresh — events and alerts will appear.
 
 | Tool | Purpose | Required |
 |---|---|---|
-| WSL 2 | Linux environment inside Windows | ✅ Yes |
-| Docker Desktop | Run all containers | ✅ Yes |
-| Git | Clone / unzip project | ✅ Yes |
-| Python 3.10+ | Run attack simulator | ✅ Yes |
-| Windows Terminal | Better terminal experience | ⭐ Recommended |
+| WSL 2 | Linux environment inside Windows | Yes |
+| Docker Desktop | Run all containers | Yes |
+| Git | Clone / unzip project | Yes |
+| Python 3.10+ | Run attack simulator | Yes |
+| Windows Terminal | Better terminal experience | Recommended |
 
 ---
 
@@ -248,17 +248,17 @@ Expected:
 * Ubuntu    Running  2
 ```
 
-> ⚠️ If VERSION shows `1`: `wsl --set-version Ubuntu 2`
+> If VERSION shows `1`: `wsl --set-version Ubuntu 2`
 
 ---
 
 ### Step 2 — Install Docker Desktop
 
-👉 Download: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+Download: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
 
 Run the installer — keep all defaults, ensure these are checked:
-- ✅ Use WSL 2 instead of Hyper-V
-- ✅ Add shortcut to desktop
+- Use WSL 2 instead of Hyper-V
+- Add shortcut to desktop
 
 **Verify in PowerShell:**
 
@@ -267,13 +267,13 @@ docker --version
 docker compose version
 ```
 
-> ⚠️ If "WSL 2 installation incomplete": Docker Desktop → Settings → Resources → WSL Integration → enable Ubuntu.
+> If "WSL 2 installation incomplete": Docker Desktop → Settings → Resources → WSL Integration → enable Ubuntu.
 
 ---
 
 ### Step 3 — Install Git
 
-👉 [https://git-scm.com/download/win](https://git-scm.com/download/win)
+[https://git-scm.com/download/win](https://git-scm.com/download/win)
 
 During install, set **Line ending conversions** to `Checkout as-is, commit as-is`.
 
@@ -285,16 +285,16 @@ git --version   # verify
 
 ### Step 4 — Install Python
 
-👉 [https://www.python.org/downloads/windows](https://www.python.org/downloads/windows)
+[https://www.python.org/downloads/windows](https://www.python.org/downloads/windows)
 
-> ✅ **Check "Add Python to PATH"** at the bottom of the installer before clicking Install.
+> **Check "Add Python to PATH"** at the bottom of the installer before clicking Install.
 
 ```powershell
 python --version   # Python 3.11.x
 pip --version
 ```
 
-> ⚠️ If `python` is not found: Settings → Apps → "App execution aliases" → disable Python store aliases.
+> If `python` is not found: Settings → Apps → "App execution aliases" → disable Python store aliases.
 
 ---
 
@@ -377,7 +377,7 @@ Takes 5–10 minutes first time. Wait for:
 api  | INFO:     Application startup complete.
 ```
 
-> 💡 Background mode: `docker compose up --build -d`
+> Background mode: `docker compose up --build -d`
 
 ---
 
@@ -431,7 +431,7 @@ All config lives in `.env`. Full reference:
 
 ---
 
-## 📋 Detection Rules
+## Detection Rules
 
 Rules live in `detection/rules.yaml` using a Sigma-inspired format:
 
@@ -483,7 +483,7 @@ curl -X POST http://localhost:8000/api/rules/sync
 
 ---
 
-## 🤖 Playbooks
+## Playbooks
 
 | Playbook | Triggers | Actions |
 |---|---|---|
@@ -510,7 +510,7 @@ PLAYBOOK_REGISTRY = {
 
 ---
 
-## 🖥️ Using the Dashboard
+## Using the Dashboard
 
 | Page | URL | What to do |
 |---|---|---|
@@ -524,13 +524,13 @@ PLAYBOOK_REGISTRY = {
 
 | Action | Meaning |
 |---|---|
-| ✅ Acknowledge | Seen it, currently investigating |
-| ✅ Resolve | Confirmed and closed |
-| 🚩 False Positive | Noise — helps track rule quality |
+| Acknowledge | Seen it, currently investigating |
+| Resolve | Confirmed and closed |
+| False Positive | Noise — helps track rule quality |
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 Interactive docs at **http://localhost:8000/docs**
 
@@ -558,7 +558,7 @@ Interactive docs at **http://localhost:8000/docs**
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -574,7 +574,7 @@ pytest tests/test_enrichment.py -v   # M6: enrichment (15 tests)
 
 ---
 
-## 💥 Attack Simulator
+## Attack Simulator
 
 ```bash
 # Run all scenarios in sequence (full kill-chain demo)
@@ -597,7 +597,7 @@ python scripts/simulate_attacks.py --list
 
 ---
 
-## 📟 Common Commands
+## Common Commands
 
 ```bash
 # View all service logs
@@ -623,7 +623,7 @@ docker stats
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 siem-lite/
@@ -673,7 +673,7 @@ siem-lite/
 
 ---
 
-## 🎯 MITRE ATT&CK Coverage
+## MITRE ATT&CK Coverage
 
 | Tactic | Technique | Rules |
 |---|---|---|
@@ -685,7 +685,7 @@ siem-lite/
 
 ---
 
-## 📈 Portfolio Notes
+## Portfolio Notes
 
 This project demonstrates:
 
@@ -698,7 +698,7 @@ This project demonstrates:
 
 ---
 
-## 📄 License
+## License
 
 MIT License — see [LICENSE](LICENSE) for details.
 
